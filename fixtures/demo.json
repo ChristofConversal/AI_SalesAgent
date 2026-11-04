@@ -1,0 +1,378 @@
+{
+  "_note": "Volledig fictieve demodata. Geen echte klanten, personen of gesprekken.",
+  "companies": [
+    { "id": "c-lindeman", "name": "Lindeman Print bv", "vat": "BE0999.123.456", "city": "Gent", "domain": "lindemanprint.be", "sector": "Drukkerij en verpakking" },
+    { "id": "c-moens", "name": "Bakkerij Moens", "vat": "BE0999.654.321", "city": "Aalst", "domain": "bakkerijmoens.be", "sector": "Voeding" }
+  ],
+  "deals": [
+    { "id": "d-lindeman", "company_id": "c-lindeman", "title": "lindemanprint.be – groeiplan", "stage": "Meeting", "amount": null },
+    { "id": "d-moens", "company_id": "c-moens", "title": "Webshop Moens", "stage": "Won", "amount": 18000 }
+  ],
+  "meetings": [
+    {
+      "id": "m-lindeman",
+      "title": "Lindeman Print – adviesgesprek",
+      "kind": "sales",
+      "capture": "mic_system",
+      "started_at": "2026-11-05T14:00:00+01:00",
+      "duration_min": 52,
+      "status": "planned",
+      "company_id": null,
+      "deal_id": null,
+      "participants": [
+        { "name": "Lotte Vermeulen", "role": "Strateeg", "side": "conversal" },
+        { "name": "Sofie Lindeman", "role": "Zaakvoerder", "side": "klant", "email": "sofie@lindemanprint.be" },
+        { "name": "Pieter Claes", "role": "Operations manager", "side": "klant", "email": "pieter@lindemanprint.be" }
+      ],
+      "summary": null
+    },
+    {
+      "id": "m-moens",
+      "title": "Bakkerij Moens – kickoff webshop",
+      "kind": "kickoff",
+      "capture": "mic",
+      "started_at": "2026-10-28T10:00:00+01:00",
+      "duration_min": 41,
+      "status": "ready",
+      "company_id": "c-moens",
+      "deal_id": "d-moens",
+      "participants": [
+        { "name": "Lotte Vermeulen", "role": "Strateeg", "side": "conversal" },
+        { "name": "Jan Moens", "role": "Zaakvoerder", "side": "klant" }
+      ],
+      "summary": "Kickoff van de webshop. Lancering gepland in februari; Jan levert productfoto's en prijzen tegen half december."
+    },
+    {
+      "id": "m-weekly",
+      "title": "Interne weekmeeting",
+      "kind": "internal",
+      "capture": "mic",
+      "started_at": "2026-11-03T09:00:00+01:00",
+      "duration_min": 30,
+      "status": "ready",
+      "company_id": null,
+      "deal_id": null,
+      "participants": [{ "name": "Lotte Vermeulen", "role": "Strateeg", "side": "conversal" }],
+      "summary": "Planning van de week en overzicht van de open offertes."
+    }
+  ],
+  "lead_engine": [
+    {
+      "company_id": "c-lindeman",
+      "status": "identified",
+      "icp_score": null,
+      "icp_confidence": 0.2,
+      "fte": null,
+      "revenue_eur": null,
+      "gross_margin_eur": null,
+      "signals": [],
+      "leadinfo": null,
+      "web": null,
+      "updated_at": "2026-09-14T08:00:00+02:00"
+    }
+  ],
+  "lead_engine_enrichment": {
+    "c-lindeman": {
+      "status": "enriched",
+      "icp_score": 78,
+      "icp_confidence": 0.8,
+      "fte": 18,
+      "revenue_eur": 2400000,
+      "gross_margin_eur": 910000,
+      "signals": [
+        { "type": "vacancy", "text": "Vacature: prepress-operator (voltijds)", "date": "2026-10-21" },
+        { "type": "news", "text": "Nieuwe digitale drukpers in gebruik genomen", "date": "2026-09-02" }
+      ],
+      "leadinfo": { "first_visit": "2026-10-16", "last_visit": "2026-10-30", "pages": ["/diensten/odoo", "/cases/drukkerij-vandaele", "/groeistrategie"] },
+      "web": { "cms": "WordPress 5.4", "pagespeed": 38, "keywords": 41 }
+    }
+  },
+  "transcript": [
+    { "seq": 0, "start_ms": 30000, "end_ms": 58000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Bedankt om tijd te maken. Vandaag willen we vooral luisteren, ons advies brengen we in een tweede gesprek." },
+      { "channel": "system", "speaker": "Sofie", "text": "Prima. Ik heb wel om half vijf een volgende afspraak, dus laten we efficiënt zijn." }
+    ]},
+    { "seq": 1, "start_ms": 180000, "end_ms": 208000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Vertel eens kort: wat doen jullie vandaag en voor wie?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Drukwerk voor bedrijven: verpakkingen, brochures, beursmateriaal. We zijn met achttien. De grootste klanten zijn retailketens en een paar farmabedrijven." },
+      { "channel": "system", "speaker": "Pieter", "text": "Farma is het meest winstgevend. De specificaties zijn streng, maar de marges zijn goed." }
+    ]},
+    { "seq": 2, "start_ms": 420000, "end_ms": 448000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Als ik jullie klanten vraag waarom ze voor jullie kiezen, wat zeggen ze dan?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Snelheid. Wij leveren in achtenveertig uur waar anderen een week nodig hebben. En we denken mee over de verpakking." }
+    ]},
+    { "seq": 3, "start_ms": 660000, "end_ms": 688000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Stel dat we hier over drie jaar terug zitten. Wat moet er dan veranderd zijn?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Dan doen we de helft meer omzet, vooral in farma en verpakking. Nu zitten we rond twee komma vier miljoen." },
+      { "channel": "mic", "speaker": "Lotte", "text": "En als jullie morgen dubbel zoveel klanten hebben, waar kraakt het dan eerst?" },
+      { "channel": "system", "speaker": "Pieter", "text": "Bij de offertes. Elke offerte reken ik nog in Excel. Dat is soms een halve dag werk." }
+    ]},
+    { "seq": 4, "start_ms": 900000, "end_ms": 928000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Dat kan je perfect oplossen met een offertetool in Odoo. Dat hebben we bij een andere drukkerij gebouwd, dat kost ongeveer twintigduizend euro." },
+      { "channel": "system", "speaker": "Sofie", "text": "Hm. Odoo hebben we twee jaar geleden al eens bekeken." }
+    ]},
+    { "seq": 5, "start_ms": 1140000, "end_ms": 1168000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Hoe komt een typische nieuwe klant vandaag bij jullie binnen?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Meestal via via, of via beurzen. De website levert weinig op, denk ik." },
+      { "channel": "system", "speaker": "Pieter", "text": "Aanvragen komen per mail bij mij binnen, of via Kris, onze vertegenwoordiger. Die houdt alles in zijn eigen Outlook bij." }
+    ]},
+    { "seq": 6, "start_ms": 1380000, "end_ms": 1408000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Waar verliezen jullie vandaag kansen?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Als Kris met vakantie is, ligt alles stil. Vorige zomer zijn we zo zeker drie farma-offertes kwijtgespeeld." }
+    ]},
+    { "seq": 7, "start_ms": 1620000, "end_ms": 1648000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Als een prospect klant wordt, wat gebeurt er dan intern? Met welke systemen?" },
+      { "channel": "system", "speaker": "Pieter", "text": "Boekhouding in Exact, planning op een whiteboard en in een gedeelde Excel, en het MIS van de drukpers. Die praten niet met elkaar. Ik typ orders twee keer over." }
+    ]},
+    { "seq": 8, "start_ms": 1860000, "end_ms": 1888000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Hebben jullie snel genoeg zicht op de cijfers om te beslissen?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Marge per order? Pas na de maandafsluiting, als de boekhouder klaar is. Dan is het te laat om bij te sturen." }
+    ]},
+    { "seq": 9, "start_ms": 2100000, "end_ms": 2128000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Past jullie uitstraling nog bij het bedrijf dat jullie willen worden?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Onze site is van 2017. Eerlijk, die zegt niets over farma of over verpakking." }
+    ]},
+    { "seq": 10, "start_ms": 2340000, "end_ms": 2368000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Waarom komt dit nu op tafel?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Een farmaklant vraagt vanaf volgend jaar elektronische orderbevestigingen en traceerbaarheid per lot. Kunnen we dat niet, dan verliezen we die klant. Dat is vierhonderdduizend euro omzet." }
+    ]},
+    { "seq": 11, "start_ms": 2580000, "end_ms": 2608000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Wij doen eigenlijk alles: websites, Odoo, koppelingen, campagnes, AI-agents. We hebben ook een eigen CRM gebouwd, en we werken met een vast team van strategen en developers, dus we kunnen dat allemaal voor jullie opnemen." },
+      { "channel": "system", "speaker": "Sofie", "text": "Oké." }
+    ]},
+    { "seq": 12, "start_ms": 2820000, "end_ms": 2848000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Wie beslist er mee over een traject als dit?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Ik beslis, maar mijn vennoot Marc moet akkoord geven bij grote investeringen. Hij zat er vandaag niet bij." }
+    ]},
+    { "seq": 13, "start_ms": 3060000, "end_ms": 3088000, "utterances": [
+      { "channel": "mic", "speaker": "Lotte", "text": "Mag ik kort samenvatten? Jullie willen groeien in farma, maar offertes, opvolging en orders hangen af van een paar mensen en losse systemen." },
+      { "channel": "system", "speaker": "Sofie", "text": "Klopt. Stuur maar een voorstel." },
+      { "channel": "mic", "speaker": "Lotte", "text": "Zullen we een tweede gesprek plannen, met Marc erbij?" },
+      { "channel": "system", "speaker": "Sofie", "text": "Volgende week dinsdag kan." }
+    ]}
+  ],
+  "scripted": {
+    "briefing": {
+      "klant": "Lindeman Print is een Gentse drukkerij met 18 VTE en een omzet van ongeveer €2,4 miljoen. Ze doen verpakkingen, brochures en beursmateriaal voor B2B. Recent namen ze een digitale drukpers in gebruik en zoeken ze een prepress-operator.",
+      "bekend": [
+        { "feit": "18 VTE, omzet ±€2,4 miljoen, brutomarge ±€910.000", "bron": "Lead Engine (NBB)" },
+        { "feit": "ICP-score 78 (zekerheid 0,8)", "bron": "Lead Engine" },
+        { "feit": "Bezocht onze pagina's over Odoo, de case Drukkerij Vandaele en Groeistrategie (16–30 oktober)", "bron": "Leadinfo" },
+        { "feit": "Vacature prepress-operator sinds 21 oktober", "bron": "Lead Engine (signalen)" },
+        { "feit": "Website op WordPress 5.4, PageSpeed 38, 41 keywords", "bron": "Lead Engine (websitescan)" },
+        { "feit": "Btw-nummer BE0999.123.456", "bron": "Central" }
+      ],
+      "observaties": [
+        "Jullie bekeken onze case van een andere drukkerij en de Odoo-pagina: speelt er iets rond offertes of planning?",
+        "De website laadt traag op mobiel (PageSpeed 38) en toont weinig over verpakking."
+      ],
+      "route": { "primary": "strategie", "scenario": "B", "onderbouwing": "Bezoek aan Odoo en de drukkerijcase, nieuwe drukpers en een vacature wijzen op groeipijn in operations. Commerciële kansen (A) zijn nog niet zichtbaar." },
+      "hypotheses": [
+        "Offertes en planning lopen manueel en remmen de groei.",
+        "Opvolging van aanvragen hangt van één of twee mensen af.",
+        "De website werkt niet als verkoopkanaal voor de winstgevendste segmenten."
+      ],
+      "kernvragen": [
+        "Wat doen jullie vandaag, en waar komt het grootste deel van de marge vandaan?",
+        "Stel dat we over drie jaar terug zitten: wat moet er dan veranderd zijn?",
+        "Als jullie morgen dubbel zoveel klanten hebben, waar kraakt het dan eerst?",
+        "Neem een typische nieuwe klant: hoe kwam die binnen, en wat gebeurde er daarna?",
+        "Met welke systemen werken jullie, en praten die met elkaar?",
+        "Waarom komt dit nu op tafel?",
+        "Wie beslist mee, en welke ruimte is er om te investeren?"
+      ],
+      "gevoelig": ["Odoo werd misschien al eerder bekeken: eerst vragen wat er toen gebeurde, niet meteen voorstellen."],
+      "praktisch": ["De meeting hangt nog niet aan een deal: koppel ze aan 'lindemanprint.be – groeiplan'.", "Beslissers onbekend: vraag wie er mee beslist."]
+    },
+    "updates": [
+      { "t": 1, "phase": { "current": "0_opening", "timing": "op_schema", "advice": null }, "route": { "primary": "onbekend", "secondary": null, "confidence": "laag" },
+        "suggestions": [ { "id": "s1", "priority": "hoog", "type": "kernvraag", "text": "Wat doen jullie vandaag, en waar komt het grootste deel van de marge vandaan?", "reason": "Start van blok Bedrijf", "evidence": "" },
+          { "id": "s2", "priority": "normaal", "type": "communicatie", "text": "Sofie wil efficiënt zijn: kondig de agenda in één zin aan en hou je aan de tijd.", "reason": "Signaal van tijdsdruk", "evidence": "laten we efficiënt zijn" } ],
+        "coverage": { "bedrijf": "leeg", "ambitie": "leeg", "marketing": "leeg", "sales": "leeg", "operations": "leeg", "finance_data": "leeg", "systemen": "leeg", "ai_automation": "leeg", "merk": "leeg", "mensen": "leeg", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [], "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "laag", "signals": "Kort, let op de tijd", "tip": "Kort en to the point, praat in resultaten." } ],
+        "key_quotes": [], "state_notes": "Offertegegevens al in Central." },
+      { "t": 4, "phase": { "current": "1_bedrijf", "timing": "op_schema", "advice": null }, "route": { "primary": "onbekend", "secondary": null, "confidence": "laag" },
+        "suggestions": [ { "id": "s3", "priority": "hoog", "type": "kernvraag", "text": "Als ik jullie klanten vraag waarom ze voor jullie kiezen, wat zeggen ze dan?", "reason": "USP nog niet gehoord", "evidence": "" },
+          { "id": "s4", "priority": "normaal", "type": "doorvraag", "text": "Welk deel van de omzet komt uit farma, en hoe groot is de marge daar?", "reason": "Farma noemt Pieter het meest winstgevend", "evidence": "Farma is het meest winstgevend." } ],
+        "coverage": { "bedrijf": "dun", "ambitie": "leeg", "marketing": "leeg", "sales": "leeg", "operations": "leeg", "finance_data": "leeg", "systemen": "leeg", "ai_automation": "leeg", "merk": "leeg", "mensen": "dun", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [], "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "laag", "signals": "Kort, let op de tijd", "tip": "Kort en to the point, praat in resultaten." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "laag", "signals": "Spreekt over specificaties en marges", "tip": "Geef hem ruimte voor details." } ],
+        "key_quotes": ["Farma is het meest winstgevend."], "state_notes": "" },
+      { "t": 8, "phase": { "current": "1_bedrijf", "timing": "op_schema", "advice": null }, "route": { "primary": "onbekend", "secondary": null, "confidence": "laag" },
+        "suggestions": [ { "id": "s5", "priority": "hoog", "type": "kernvraag", "text": "Stel dat we over drie jaar terug zitten: wat moet er dan veranderd zijn?", "reason": "Blok Bedrijf is gedekt, tijd voor Ambitie", "evidence": "" },
+          { "id": "s4", "priority": "normaal", "type": "doorvraag", "text": "Welk deel van de omzet komt uit farma, en hoe groot is de marge daar?", "reason": "Farma noemt Pieter het meest winstgevend", "evidence": "Farma is het meest winstgevend." } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "leeg", "marketing": "leeg", "sales": "leeg", "operations": "leeg", "finance_data": "leeg", "systemen": "leeg", "ai_automation": "leeg", "merk": "leeg", "mensen": "dun", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [], "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "midden", "signals": "Kort, let op de tijd, denkt in snelheid", "tip": "Kort en to the point, praat in resultaten." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "laag", "signals": "Spreekt over specificaties en marges", "tip": "Geef hem ruimte voor details." } ],
+        "key_quotes": ["Wij leveren in achtenveertig uur waar anderen een week nodig hebben."], "state_notes": "" },
+      { "t": 12, "phase": { "current": "2_ambitie", "timing": "op_schema", "advice": null }, "route": { "primary": "strategie", "secondary": null, "confidence": "laag" },
+        "suggestions": [ { "id": "s6", "priority": "hoog", "type": "doorvraag", "text": "Hoeveel offertes maken jullie per maand, en hoeveel daarvan worden een order?", "reason": "Offertes kraken eerst; nog geen cijfers", "evidence": "Elke offerte reken ik nog in Excel." },
+          { "id": "s7", "priority": "normaal", "type": "doorvraag", "text": "Twee komma vier naar drie komma zes miljoen: tegen wanneer, en welk deel uit farma?", "reason": "Ambitie heeft een cijfer, maar geen termijn", "evidence": "Dan doen we de helft meer omzet" } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "leeg", "sales": "dun", "operations": "dun", "finance_data": "leeg", "systemen": "dun", "ai_automation": "leeg", "merk": "leeg", "mensen": "dun", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Offertes rekenen kost een halve dag per stuk; een offertetool gekoppeld aan prijzen versnelt de verkoop.", "quote": "Elke offerte reken ik nog in Excel. Dat is soms een halve dag werk.", "strength": "midden" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "midden", "signals": "Kort, denkt in omzet en snelheid", "tip": "Kort en to the point, praat in resultaten." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "midden", "signals": "Precies over werkwijze en tijd", "tip": "Vraag hem één proces stap voor stap te beschrijven." } ],
+        "key_quotes": ["Dan doen we de helft meer omzet, vooral in farma en verpakking."], "state_notes": "" },
+      { "t": 16, "phase": { "current": "2_ambitie", "timing": "op_schema", "advice": null }, "route": { "primary": "strategie", "secondary": "tech", "confidence": "midden" },
+        "suggestions": [ { "id": "s8", "priority": "kritiek", "type": "waarschuwing", "text": "Je stelt een oplossing en een prijs voor. Terug naar luisteren: advies komt in het tweede gesprek.", "reason": "Admin adviseert en noemt een bedrag in de analysefase", "evidence": "dat kost ongeveer twintigduizend euro" },
+          { "id": "s9", "priority": "hoog", "type": "doorvraag", "text": "Wat gebeurde er toen jullie Odoo bekeken, en waarom ging het niet door?", "reason": "Eerdere poging, nog niet uitgediept", "evidence": "Odoo hebben we twee jaar geleden al eens bekeken." },
+          { "id": "s6", "priority": "hoog", "type": "doorvraag", "text": "Hoeveel offertes maken jullie per maand, en hoeveel daarvan worden een order?", "reason": "Offertes kraken eerst; nog geen cijfers", "evidence": "Elke offerte reken ik nog in Excel." } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "leeg", "sales": "dun", "operations": "dun", "finance_data": "leeg", "systemen": "dun", "ai_automation": "leeg", "merk": "leeg", "mensen": "dun", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Offertes rekenen kost een halve dag per stuk; een offertetool gekoppeld aan prijzen versnelt de verkoop.", "quote": "Elke offerte reken ik nog in Excel. Dat is soms een halve dag werk.", "strength": "midden" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "midden", "signals": "Kort, sceptisch bij een snel voorstel", "tip": "Geen oplossing pushen; laat haar eerst de eerdere ervaring vertellen." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "midden", "signals": "Precies over werkwijze en tijd", "tip": "Vraag hem één proces stap voor stap te beschrijven." } ],
+        "key_quotes": ["Odoo hebben we twee jaar geleden al eens bekeken."], "state_notes": "Admin adviseerde op min 15." },
+      { "t": 20, "phase": { "current": "3_klantreis", "timing": "op_schema", "advice": null }, "route": { "primary": "strategie", "secondary": "groei", "confidence": "midden" },
+        "suggestions": [ { "id": "s10", "priority": "hoog", "type": "kernvraag", "text": "Waar verliezen jullie vandaag kansen?", "reason": "Klantreis in beeld, verliesplek nog niet", "evidence": "" },
+          { "id": "s11", "priority": "normaal", "type": "doorvraag", "text": "Wat gebeurt er met een aanvraag als Kris er een week niet is?", "reason": "Opvolging hangt van één persoon af", "evidence": "Die houdt alles in zijn eigen Outlook bij." },
+          { "id": "s9", "priority": "normaal", "type": "doorvraag", "text": "Wat gebeurde er toen jullie Odoo bekeken, en waarom ging het niet door?", "reason": "Eerdere poging, nog niet uitgediept", "evidence": "Odoo hebben we twee jaar geleden al eens bekeken." } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "dun", "sales": "dun", "operations": "dun", "finance_data": "leeg", "systemen": "dun", "ai_automation": "leeg", "merk": "leeg", "mensen": "dun", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Offertes rekenen kost een halve dag per stuk; een offertetool gekoppeld aan prijzen versnelt de verkoop.", "quote": "Elke offerte reken ik nog in Excel. Dat is soms een halve dag werk.", "strength": "midden" },
+          { "scenario": "A", "discipline": "growth", "hypothesis": "Leadopvolging zit in één persoonlijke mailbox; een gedeelde pipeline voorkomt verloren aanvragen.", "quote": "Die houdt alles in zijn eigen Outlook bij.", "strength": "midden" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "midden", "signals": "Kort, denkt in omzet en snelheid", "tip": "Kort en to the point, praat in resultaten." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "midden", "signals": "Precies over werkwijze en tijd", "tip": "Vraag hem één proces stap voor stap te beschrijven." },
+          { "name": "Kris", "role": "Vertegenwoordiger (niet aanwezig)", "decision_role": "gebruiker", "style": "onbekend", "confidence": "laag", "signals": "", "tip": "" } ],
+        "key_quotes": ["De website levert weinig op, denk ik."], "state_notes": "" },
+      { "t": 24, "phase": { "current": "3_klantreis", "timing": "op_schema", "advice": null }, "route": { "primary": "strategie", "secondary": "groei", "confidence": "midden" },
+        "suggestions": [ { "id": "s12", "priority": "hoog", "type": "doorvraag", "text": "Wat brachten die drie farma-offertes samen op?", "reason": "Verlies benoemd, waarde nog niet", "evidence": "zeker drie farma-offertes kwijtgespeeld" },
+          { "id": "s13", "priority": "hoog", "type": "kernvraag", "text": "Als een prospect klant wordt, wat gebeurt er dan intern?", "reason": "Volgende blok: Operations", "evidence": "" } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "dun", "sales": "gedekt", "operations": "dun", "finance_data": "leeg", "systemen": "dun", "ai_automation": "leeg", "merk": "leeg", "mensen": "dun", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Offertes rekenen kost een halve dag per stuk; een offertetool gekoppeld aan prijzen versnelt de verkoop.", "quote": "Elke offerte reken ik nog in Excel. Dat is soms een halve dag werk.", "strength": "midden" },
+          { "scenario": "A", "discipline": "growth", "hypothesis": "Leadopvolging hangt van Kris af; zonder hem gaan farma-offertes verloren.", "quote": "Als Kris met vakantie is, ligt alles stil.", "strength": "sterk" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "midden", "signals": "Kort, denkt in omzet en snelheid", "tip": "Kort en to the point, praat in resultaten." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "midden", "signals": "Precies over werkwijze en tijd", "tip": "Vraag hem één proces stap voor stap te beschrijven." } ],
+        "key_quotes": ["Als Kris met vakantie is, ligt alles stil."], "state_notes": "" },
+      { "t": 28, "phase": { "current": "4_operations", "timing": "op_schema", "advice": null }, "route": { "primary": "strategie", "secondary": "tech", "confidence": "hoog" },
+        "suggestions": [ { "id": "s14", "priority": "hoog", "type": "doorvraag", "text": "Hoeveel uur per week gaat er naar het overtypen van orders?", "reason": "Dubbel werk benoemd, nog niet gekwantificeerd", "evidence": "Ik typ orders twee keer over." },
+          { "id": "s15", "priority": "normaal", "type": "doorvraag", "text": "Wat moeten jullie zeker behouden: Exact, het MIS, of allebei?", "reason": "Systemen bij naam, keuzes nog open", "evidence": "Boekhouding in Exact" } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "dun", "sales": "gedekt", "operations": "gedekt", "finance_data": "leeg", "systemen": "gedekt", "ai_automation": "leeg", "merk": "leeg", "mensen": "dun", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Exact, het MIS en de planning praten niet; een koppeling haalt het dubbele invoerwerk weg.", "quote": "Die praten niet met elkaar. Ik typ orders twee keer over.", "strength": "sterk" },
+          { "scenario": "A", "discipline": "growth", "hypothesis": "Leadopvolging hangt van Kris af; zonder hem gaan farma-offertes verloren.", "quote": "Als Kris met vakantie is, ligt alles stil.", "strength": "sterk" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "midden", "signals": "Kort, denkt in omzet en snelheid", "tip": "Kort en to the point, praat in resultaten." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "hoog", "signals": "Somt systemen precies op", "tip": "Vraag naar uren en aantallen; hij heeft ze." } ],
+        "key_quotes": ["Die praten niet met elkaar. Ik typ orders twee keer over."], "state_notes": "" },
+      { "t": 32, "phase": { "current": "5_data_ai", "timing": "op_schema", "advice": null }, "route": { "primary": "strategie", "secondary": "tech", "confidence": "hoog" },
+        "suggestions": [ { "id": "s16", "priority": "hoog", "type": "doorvraag", "text": "Welke beslissing zou je anders nemen als je de marge per order meteen zag?", "reason": "Pijn benoemd, impact nog niet", "evidence": "Pas na de maandafsluiting" },
+          { "id": "s17", "priority": "normaal", "type": "kernvraag", "text": "Gebruiken jullie vandaag al AI, in losse tools of in processen?", "reason": "AI en automation nog leeg", "evidence": "" } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "dun", "sales": "gedekt", "operations": "gedekt", "finance_data": "dun", "systemen": "gedekt", "ai_automation": "leeg", "merk": "leeg", "mensen": "dun", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Exact, het MIS en de planning praten niet; een koppeling haalt het dubbele invoerwerk weg.", "quote": "Die praten niet met elkaar. Ik typ orders twee keer over.", "strength": "sterk" },
+          { "scenario": "D", "discipline": "build", "hypothesis": "Marge per order is pas na de maandafsluiting zichtbaar; een dashboard maakt bijsturen mogelijk.", "quote": "Dan is het te laat om bij te sturen.", "strength": "midden" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "hoog", "signals": "Wil sturen op cijfers, ongeduldig met vertraging", "tip": "Toon impact in euro's en tijd." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "hoog", "signals": "Somt systemen precies op", "tip": "Vraag naar uren en aantallen; hij heeft ze." } ],
+        "key_quotes": ["Dan is het te laat om bij te sturen."], "state_notes": "" },
+      { "t": 36, "phase": { "current": "6_merk", "timing": "op_schema", "advice": null }, "route": { "primary": "strategie", "secondary": "tech", "confidence": "hoog" },
+        "suggestions": [ { "id": "s18", "priority": "hoog", "type": "kernvraag", "text": "Waarom komt dit nu op tafel? Wat gebeurt er als er volgend jaar niets verandert?", "reason": "Urgentie nog leeg", "evidence": "" },
+          { "id": "s17", "priority": "normaal", "type": "kernvraag", "text": "Gebruiken jullie vandaag al AI, in losse tools of in processen?", "reason": "AI en automation nog leeg", "evidence": "" } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "dun", "sales": "gedekt", "operations": "gedekt", "finance_data": "dun", "systemen": "gedekt", "ai_automation": "leeg", "merk": "gedekt", "mensen": "dun", "urgentie": "leeg", "budget": "leeg", "beslissing": "leeg", "deadline": "leeg", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Exact, het MIS en de planning praten niet; een koppeling haalt het dubbele invoerwerk weg.", "quote": "Die praten niet met elkaar. Ik typ orders twee keer over.", "strength": "sterk" },
+          { "scenario": "C", "discipline": "creative", "hypothesis": "De website toont de winstgevendste segmenten niet.", "quote": "die zegt niets over farma of over verpakking", "strength": "zwak" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "hoog", "signals": "Wil sturen op cijfers, ongeduldig met vertraging", "tip": "Toon impact in euro's en tijd." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "hoog", "signals": "Somt systemen precies op", "tip": "Vraag naar uren en aantallen; hij heeft ze." } ],
+        "key_quotes": ["Onze site is van 2017."], "state_notes": "" },
+      { "t": 40, "phase": { "current": "7_beslissing", "timing": "op_schema", "advice": null }, "route": { "primary": "strategie", "secondary": "tech", "confidence": "hoog" },
+        "suggestions": [ { "id": "s19", "priority": "hoog", "type": "doorvraag", "text": "Tegen welke datum moet traceerbaarheid per lot werken voor die farmaklant?", "reason": "Harde deadline vermoed, datum nog niet", "evidence": "vanaf volgend jaar elektronische orderbevestigingen" },
+          { "id": "s20", "priority": "hoog", "type": "kernvraag", "text": "Wie beslist mee over een traject als dit?", "reason": "Beslissing nog leeg", "evidence": "" } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "dun", "sales": "gedekt", "operations": "gedekt", "finance_data": "dun", "systemen": "gedekt", "ai_automation": "leeg", "merk": "gedekt", "mensen": "dun", "urgentie": "gedekt", "budget": "leeg", "beslissing": "leeg", "deadline": "dun", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Traceerbaarheid per lot en elektronische orderbevestigingen vragen gekoppelde systemen; zonder dat gaat €400.000 omzet verloren.", "quote": "Dat is vierhonderdduizend euro omzet.", "strength": "sterk" },
+          { "scenario": "A", "discipline": "growth", "hypothesis": "Leadopvolging hangt van Kris af; zonder hem gaan farma-offertes verloren.", "quote": "Als Kris met vakantie is, ligt alles stil.", "strength": "sterk" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "hoog", "signals": "Wil sturen op cijfers, ongeduldig met vertraging", "tip": "Toon impact in euro's en tijd." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "hoog", "signals": "Somt systemen precies op", "tip": "Vraag naar uren en aantallen; hij heeft ze." } ],
+        "key_quotes": ["Kunnen we dat niet, dan verliezen we die klant. Dat is vierhonderdduizend euro omzet."], "state_notes": "Urgentie gedekt, deadline dun." },
+      { "t": 44, "phase": { "current": "7_beslissing", "timing": "loopt_uit", "advice": "Je praat al een minuut over Conversal. Stel de beslissingsvraag." }, "route": { "primary": "strategie", "secondary": "tech", "confidence": "hoog" },
+        "suggestions": [ { "id": "s21", "priority": "kritiek", "type": "waarschuwing", "text": "Je bent aan het pitchen. Stop en vraag: wie beslist er mee?", "reason": "Lange monoloog over het aanbod in de analysefase", "evidence": "Wij doen eigenlijk alles" },
+          { "id": "s20", "priority": "hoog", "type": "kernvraag", "text": "Wie beslist mee over een traject als dit?", "reason": "Beslissing nog leeg", "evidence": "" },
+          { "id": "s22", "priority": "hoog", "type": "kernvraag", "text": "Hoeveel investeren jullie vandaag per jaar in marketing en IT samen?", "reason": "Budget nog leeg", "evidence": "" } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "dun", "sales": "gedekt", "operations": "gedekt", "finance_data": "dun", "systemen": "gedekt", "ai_automation": "leeg", "merk": "gedekt", "mensen": "dun", "urgentie": "gedekt", "budget": "leeg", "beslissing": "leeg", "deadline": "dun", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Traceerbaarheid per lot en elektronische orderbevestigingen vragen gekoppelde systemen; zonder dat gaat €400.000 omzet verloren.", "quote": "Dat is vierhonderdduizend euro omzet.", "strength": "sterk" },
+          { "scenario": "A", "discipline": "growth", "hypothesis": "Leadopvolging hangt van Kris af; zonder hem gaan farma-offertes verloren.", "quote": "Als Kris met vakantie is, ligt alles stil.", "strength": "sterk" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "hoog", "signals": "Antwoordt kort met 'Oké' tijdens de pitch", "tip": "Ze haakt af bij lange uitleg. Kort, en geef haar het woord." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "hoog", "signals": "Somt systemen precies op", "tip": "Vraag naar uren en aantallen; hij heeft ze." } ],
+        "key_quotes": [], "state_notes": "Admin pitcht op min 43." },
+      { "t": 48, "phase": { "current": "7_beslissing", "timing": "loopt_uit", "advice": "Nog 4 minuten: budget en vervolgafspraak met Marc vastleggen." }, "route": { "primary": "strategie", "secondary": "tech", "confidence": "hoog" },
+        "suggestions": [ { "id": "s22", "priority": "kritiek", "type": "kernvraag", "text": "Hoeveel investeren jullie vandaag per jaar in marketing en IT samen?", "reason": "Minuut 48 en budget nog leeg", "evidence": "" },
+          { "id": "s23", "priority": "kritiek", "type": "check", "text": "Kan Marc aansluiten bij het tweede gesprek? Welke datum past voor hem?", "reason": "Beslisser was er niet bij", "evidence": "Hij zat er vandaag niet bij." },
+          { "id": "s19", "priority": "hoog", "type": "doorvraag", "text": "Tegen welke datum moet traceerbaarheid per lot werken voor die farmaklant?", "reason": "Deadline nog dun", "evidence": "vanaf volgend jaar" } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "dun", "sales": "gedekt", "operations": "gedekt", "finance_data": "dun", "systemen": "gedekt", "ai_automation": "leeg", "merk": "gedekt", "mensen": "gedekt", "urgentie": "gedekt", "budget": "leeg", "beslissing": "gedekt", "deadline": "dun", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Traceerbaarheid per lot en elektronische orderbevestigingen vragen gekoppelde systemen; zonder dat gaat €400.000 omzet verloren.", "quote": "Dat is vierhonderdduizend euro omzet.", "strength": "sterk" },
+          { "scenario": "A", "discipline": "growth", "hypothesis": "Leadopvolging hangt van Kris af; zonder hem gaan farma-offertes verloren.", "quote": "Als Kris met vakantie is, ligt alles stil.", "strength": "sterk" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "hoog", "signals": "Beslist, maar niet alleen", "tip": "Vraag wat zij nodig heeft om Marc te overtuigen." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "hoog", "signals": "Somt systemen precies op", "tip": "Vraag naar uren en aantallen; hij heeft ze." },
+          { "name": "Marc", "role": "Vennoot (niet aanwezig)", "decision_role": "beslisser", "style": "onbekend", "confidence": "laag", "signals": "", "tip": "Zorg dat hij bij het tweede gesprek is." } ],
+        "key_quotes": ["Mijn vennoot Marc moet akkoord geven bij grote investeringen."], "state_notes": "" },
+      { "t": 52, "phase": { "current": "8_afronden", "timing": "op_schema", "advice": null }, "route": { "primary": "strategie", "secondary": "tech", "confidence": "hoog" },
+        "suggestions": [ { "id": "s22", "priority": "kritiek", "type": "kernvraag", "text": "Voor het voorstel: welke ruimte is er om hierin te investeren?", "reason": "Gesprek eindigt zonder budget", "evidence": "Stuur maar een voorstel." },
+          { "id": "s24", "priority": "hoog", "type": "check", "text": "Dinsdag welk uur, en kan Marc erbij zijn?", "reason": "Volgende stap zonder uur en zonder beslisser", "evidence": "Volgende week dinsdag kan." },
+          { "id": "s25", "priority": "normaal", "type": "kernvraag", "text": "Is er nog iets dat ik moet weten?", "reason": "Afsluitende vraag van de analysefase", "evidence": "" } ],
+        "coverage": { "bedrijf": "gedekt", "ambitie": "dun", "marketing": "dun", "sales": "gedekt", "operations": "gedekt", "finance_data": "dun", "systemen": "gedekt", "ai_automation": "leeg", "merk": "gedekt", "mensen": "gedekt", "urgentie": "gedekt", "budget": "leeg", "beslissing": "gedekt", "deadline": "dun", "offertegegevens": "gedekt" },
+        "opportunities": [ { "scenario": "B", "discipline": "build", "hypothesis": "Traceerbaarheid per lot en elektronische orderbevestigingen vragen gekoppelde systemen; zonder dat gaat €400.000 omzet verloren.", "quote": "Dat is vierhonderdduizend euro omzet.", "strength": "sterk" },
+          { "scenario": "A", "discipline": "growth", "hypothesis": "Leadopvolging hangt van Kris af; zonder hem gaan farma-offertes verloren.", "quote": "Als Kris met vakantie is, ligt alles stil.", "strength": "sterk" } ],
+        "people": [ { "name": "Sofie", "role": "Zaakvoerder", "decision_role": "beslisser", "style": "rood", "confidence": "hoog", "signals": "Beslist, maar niet alleen", "tip": "Bevestig de afspraak schriftelijk, kort." },
+          { "name": "Pieter", "role": "Operations manager", "decision_role": "beïnvloeder", "style": "blauw", "confidence": "hoog", "signals": "Somt systemen precies op", "tip": "Vraag hem vooraf het orderproces op papier te zetten." },
+          { "name": "Marc", "role": "Vennoot (niet aanwezig)", "decision_role": "beslisser", "style": "onbekend", "confidence": "laag", "signals": "", "tip": "Zorg dat hij bij het tweede gesprek is." } ],
+        "key_quotes": ["Klopt. Stuur maar een voorstel."], "state_notes": "" }
+    ],
+    "debrief": {
+      "salesfiche": [
+        { "onderdeel": "Bedrijf", "inhoud": "B2B-drukkerij, 18 medewerkers: verpakkingen, brochures, beursmateriaal. Klanten: retailketens en farmabedrijven. Klanten kiezen voor levering in 48 uur.", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "Ambitie", "inhoud": "Binnen drie jaar 50% meer omzet (van ±€2,4 miljoen), vooral in farma en verpakking.", "dekking": "dun", "ophalen": "Tegen wanneer precies, en welk deel uit farma?" },
+        { "onderdeel": "Marketing", "inhoud": "Klanten komen via via en via beurzen. De website (2017) levert volgens Sofie weinig op.", "dekking": "dun", "ophalen": "Hoeveel aanvragen komen er per maand binnen, en via welk kanaal?" },
+        { "onderdeel": "Sales", "inhoud": "Aanvragen per mail bij Pieter of in de Outlook van vertegenwoordiger Kris. Afwezigheid van Kris kostte vorige zomer minstens drie farma-offertes.", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "Operations", "inhoud": "Offertes in Excel, tot een halve dag per stuk. Orders worden twee keer ingetypt.", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "Finance en data", "inhoud": "Marge per order pas zichtbaar na de maandafsluiting.", "dekking": "dun", "ophalen": "Welke cijfers willen jullie wekelijks zien?" },
+        { "onderdeel": "Systemen", "inhoud": "Exact (boekhouding), MIS van de drukpers, planning op whiteboard en Excel, Outlook. Geen koppelingen. Odoo werd twee jaar geleden bekeken.", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "AI en automation", "inhoud": "[ontbreekt]", "dekking": "leeg", "ophalen": "Gebruiken jullie AI al, in losse tools of in processen?" },
+        { "onderdeel": "Merk", "inhoud": "Website van 2017 die farma en verpakking niet toont.", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "Mensen", "inhoud": "Sofie (zaakvoerder), Pieter (operations, doet offertes), Kris (vertegenwoordiger), Marc (vennoot).", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "Urgentie", "inhoud": "Een farmaklant eist vanaf volgend jaar elektronische orderbevestigingen en traceerbaarheid per lot. Risico: €400.000 omzet.", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "Budget", "inhoud": "[ontbreekt]", "dekking": "leeg", "ophalen": "Hoeveel investeren jullie vandaag per jaar in marketing en IT samen?" },
+        { "onderdeel": "Beslissing", "inhoud": "Sofie beslist; vennoot Marc moet akkoord geven bij grote investeringen. Marc was niet aanwezig.", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "Route", "inhoud": "Strategie, met een sterk tech-luik (koppelingen, offertes, traceerbaarheid).", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "Strategieniveau", "inhoud": "** : sales, operations en finance zijn betrokken, met twee beslissers.", "dekking": "gedekt", "ophalen": null },
+        { "onderdeel": "Hypotheses", "inhoud": "1) Gekoppelde systemen zijn nodig om de farmaklant te houden. 2) Opvolging moet uit één mailbox. 3) Offertes sneller = meer farma-orders. 4) Marge per order sneller zichtbaar = beter sturen.", "dekking": "gedekt", "ophalen": null }
+      ],
+      "spanningszinnen": [
+        "Snel in leveren, traag in alles daarvoor.",
+        "Klaar om te groeien in farma, maar de systemen houden het niet bij.",
+        "Achtenveertig uur levertijd, een halve dag per offerte."
+      ],
+      "doelstellingen": [
+        "\"De helft meer omzet, vooral in farma en verpakking.\"",
+        "De farmaklant houden die traceerbaarheid per lot eist (€400.000 omzet).",
+        "Marge per order zien voordat het \"te laat is om bij te sturen\"."
+      ],
+      "sterktes": [
+        "Levering in 48 uur, waar anderen een week nodig hebben.",
+        "Een winstgevende positie in farma met strenge specificaties.",
+        "Meedenken over verpakking."
+      ],
+      "huidige_werking": [
+        "Aanvragen komen binnen via mail of via de persoonlijke mailbox van de vertegenwoordiger.",
+        "Offertes worden in Excel berekend, tot een halve dag per stuk.",
+        "Orders worden twee keer ingetypt: Exact en MIS praten niet met elkaar.",
+        "De marge per order is pas na de maandafsluiting bekend."
+      ],
+      "open_vragen": [
+        "Welke systemen blijven, en wat wordt gekoppeld of vervangen?",
+        "Wat ging er mis bij de eerdere verkenning van Odoo?",
+        "Hoeveel offertes en orders per maand, en wat brengt een farma-order op?",
+        "Tegen welke datum moet traceerbaarheid per lot werken?"
+      ],
+      "scenario": {
+        "code": "B",
+        "citaten": ["Elke offerte reken ik nog in Excel.", "Die praten niet met elkaar. Ik typ orders twee keer over.", "Dat is vierhonderdduizend euro omzet."],
+        "te_beslissen": "Exact en het MIS koppelen, of naar één ERP? En hoe past de opvolging van leads (scenario A) erbij?"
+      },
+      "pitchversie": { "versie": "2", "motivatie": "De noden zijn duidelijk (operations en een harde klanteis), met twee beslissers. Een eerste richting tonen helpt Marc beslissen. Budget ontbreekt nog: vraag het vóór de pitch." },
+      "next_steps": [
+        { "wie": "Conversal", "wat": "Voorstel strategie (groeiplan) met eerste richting scenario B", "wanneer": "Vóór het tweede gesprek" },
+        { "wie": "Klant", "wat": "Orderproces op papier (Pieter), datum van de farma-eis, budgetruimte", "wanneer": "Vóór dinsdag" },
+        { "wie": "Vervolg", "wat": "Tweede gesprek met Sofie, Pieter en Marc", "wanneer": "Volgende week dinsdag, uur nog vast te leggen" }
+      ],
+      "coaching": [
+        "Op minuut 15 stelde je al een oplossing en een prijs voor (€20.000). Sofie reageerde terughoudend. Advies hoort in het tweede gesprek.",
+        "Op minuut 43 pitchte je het aanbod; Sofie antwoordde enkel 'Oké'. Hou het bij vragen tot de pitch.",
+        "Budget werd niet gevraagd. Goed: de beslissingsvraag kwam er, en de volgende afspraak staat."
+      ]
+    }
+  }
+}
