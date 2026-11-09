@@ -112,8 +112,56 @@ export const LiveUpdate = z.object({
   ),
   key_quotes: z.array(z.string()),
   state_notes: z.string().describe("Korte notities voor jezelf bij het volgende segment."),
+  // Het script invullen. Enkel wat er in dit segment bijkwam; de app telt alles op.
+  asked: z.array(z.string()).describe("Id's van scriptvragen die de admin in dit segment stelde."),
+  answers: z
+    .array(
+      z.object({
+        question_id: z.string().describe("Id uit het script, of het id van een ingevoegde vraag."),
+        answer: z.string().describe("Het antwoord van de klant in hoogstens 25 woorden."),
+        quote: z.string().describe("Letterlijk citaat dat het antwoord draagt."),
+        quality: z.enum(["beantwoord", "dun"]),
+      }),
+    )
+    .describe("Nieuwe of betere antwoorden in dit segment. Een later antwoord op hetzelfde id vervangt het vorige."),
+  inserted: z
+    .array(
+      z.object({
+        id: z.string().describe("Nieuw id: i1, i2, … Nooit een bestaand id hergebruiken."),
+        step: z.enum(PHASES).describe("De stap waar dit hoort; mag een andere stap zijn dan de huidige."),
+        after: z.string().nullable().describe("Id van de scriptvraag waarna dit komt, of null voor het einde van de stap."),
+        kind: z.enum(["vraag", "notitie"]),
+        text: z.string().describe("Vraag van hoogstens 20 woorden, of notitie van hoogstens 20 woorden."),
+        reason: z.string(),
+        quote: z.string(),
+      }),
+    )
+    .describe("Doorvragen en notities die je in het script invoegt naar aanleiding van wat de klant zei."),
 });
 export type LiveUpdate = z.infer<typeof LiveUpdate>;
+
+export type ScriptAnswer = LiveUpdate["answers"][number] & { t: number };
+export type ScriptInsert = LiveUpdate["inserted"][number] & { t: number };
+
+// Alle updates samen: wat is gesteld, wat is beantwoord, wat is ingevoegd.
+export function mergeScript(updates: LiveUpdate[]) {
+  const asked = new Set<string>();
+  const answers: Record<string, ScriptAnswer> = {};
+  const inserted: ScriptInsert[] = [];
+  for (const u of updates) {
+    for (const id of u.asked ?? []) asked.add(id);
+    for (const a of u.answers ?? []) {
+      answers[a.question_id] = { ...a, t: u.t };
+      asked.add(a.question_id);
+    }
+    for (const i of u.inserted ?? []) {
+      const at = inserted.findIndex((x) => x.id === i.id);
+      if (at >= 0) inserted[at] = { ...i, t: u.t };
+      else inserted.push({ ...i, t: u.t });
+    }
+  }
+  return { asked, answers, inserted };
+}
 
 export const Briefing = z.object({
   klant: z.string().describe("De klant in hoogstens 3 zinnen."),

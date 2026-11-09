@@ -49,9 +49,10 @@ async function ask<S extends z.ZodType>(opts: {
   return response.parsed_output as z.infer<S>;
 }
 
-export function claudeLive(dossier: string, previous: LiveUpdate | null, transcript: string, minute: number) {
+export function claudeLive(dossier: string, previous: LiveUpdate | null, scriptState: string, transcript: string, minute: number) {
   const user = [
-    `Vorige update:\n${previous ? JSON.stringify(previous) : "geen (eerste segment)"}`,
+    `Vorige update:\n${previous ? JSON.stringify({ ...previous, asked: [], answers: [], inserted: [] }) : "geen (eerste segment)"}`,
+    `Scriptstatus tot nu toe:\n${scriptState}`,
     `Transcript tot nu toe:\n${transcript}`,
     `Het nieuwste segment eindigt op minuut ${minute}. Geef de nieuwe update.`,
   ].join("\n\n");

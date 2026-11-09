@@ -35,12 +35,29 @@ function script(meetingId: string) {
   return loadFixtures().scripted[meetingId];
 }
 
-export function liveUpdate(meetingId: string, seq: number, dossier: string, previous: LiveUpdate | null, transcript: string, minute: number) {
+export function liveUpdate(
+  meetingId: string,
+  seq: number,
+  dossier: string,
+  previous: LiveUpdate | null,
+  scriptState: string,
+  transcript: string,
+  minute: number,
+) {
   return run(
-    () => claudeLive(dossier, previous, transcript, minute),
+    () => claudeLive(dossier, previous, scriptState, transcript, minute),
     () => {
-      const updates = script(meetingId)?.updates;
-      return updates?.length ? LiveUpdate.parse(updates[seq] ?? updates.at(-1)) : null;
+      const s = script(meetingId);
+      const updates = s?.updates;
+      if (!updates?.length) return null;
+      // Vooraf geschreven: de basisupdate plus wat er in dit fragment in het script bijkomt.
+      const events = (s?.script_events ?? []).find((e) => e.seq === seq);
+      return LiveUpdate.parse({
+        ...((updates[seq] ?? updates.at(-1)) as object),
+        asked: events?.asked ?? [],
+        answers: events?.answers ?? [],
+        inserted: events?.inserted ?? [],
+      });
     },
   );
 }

@@ -4,14 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import {
   COVERAGE_KEYS,
   COVERAGE_LABELS,
-  PHASES,
-  PHASE_LABELS,
   PROJECT_INFO_KEYS,
   type Briefing,
   type Debrief,
   type LiveUpdate,
 } from "@/lib/agent/schemas";
 import { act, fetchState, fmt, type MeetingState } from "./api";
+import ScriptPanel from "./ScriptPanel";
 
 type View = "briefing" | "live" | "debrief";
 type Props = { state: MeetingState; setState: (s: MeetingState) => void };
@@ -396,8 +395,6 @@ function LiveView(p: {
 
       {!p.linked && <div className="notice">Koppel eerst de meeting: zonder dossier kan de agent niet meeluisteren.</div>}
 
-      <PhaseBar u={u} />
-
       <div className="live-grid">
         <div className="stack">
           {u?.phase.advice && <div className="notice">{u.phase.advice}</div>}
@@ -426,6 +423,10 @@ function LiveView(p: {
             ))}
           {u && u.suggestions.every((s) => handled.has(s.id)) && <div className="card muted small">Geen open suggesties. Luister verder.</div>}
 
+          <ScriptPanel updates={state.updates.map((x) => x.payload)} />
+        </div>
+
+        <div className="stack">
           {lastSeg && (
             <div className="card stack-sm">
               <div className="label">Laatste fragment · {fmt(lastSeg.start_ms)}</div>
@@ -437,9 +438,6 @@ function LiveView(p: {
               ))}
             </div>
           )}
-        </div>
-
-        <div className="stack">
           <TalkRatio state={state} />
           {u && <CoverageCard u={u} t={t} />}
           {u && u.opportunities.length > 0 && (
@@ -483,20 +481,6 @@ function LiveView(p: {
           )}
         </div>
       </div>
-    </div>
-  );
-}
-
-function PhaseBar({ u }: { u?: LiveUpdate }) {
-  const idx = u ? PHASES.indexOf(u.phase.current) : -1;
-  return (
-    <div className="phasebar" aria-label="Fase van het gesprek">
-      {PHASES.map((ph, i) => (
-        <div key={ph} className={`phase ${i < idx ? "done" : ""} ${i === idx ? "current" : ""} ${i === idx && u?.phase.timing !== "op_schema" ? "late" : ""}`}>
-          <div className="bar" />
-          {PHASE_LABELS[ph]}
-        </div>
-      ))}
     </div>
   );
 }

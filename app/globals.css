@@ -620,3 +620,155 @@ ul.clean li {
     transform: rotate(360deg);
   }
 }
+
+/* Salesscript in de live-stand */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 4px;
+}
+
+@media (max-width: 900px) {
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.step {
+  border: 1px solid var(--c-border);
+  background: var(--c-white);
+  border-radius: var(--r-sm);
+  padding: 6px 8px;
+  font: 500 12px/1.3 var(--font-body);
+  color: var(--c-muted);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  text-align: left;
+  border-top: 3px solid var(--c-border);
+}
+
+.step.live {
+  border-top-color: var(--c-green);
+}
+
+.step.active {
+  background: var(--c-mint);
+  border-color: var(--c-green-border);
+  border-top-color: var(--c-green);
+  color: var(--c-ink);
+  font-weight: 600;
+}
+
+.step-meta {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--c-muted);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.step-badge {
+  background: var(--c-orange-08);
+  color: var(--c-orange);
+  border-radius: 6px;
+  padding: 0 5px;
+}
+
+.qrow {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 12px;
+  padding: 12px 4px;
+  border-top: 1px solid var(--c-border);
+}
+
+.qdot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 4px;
+  border: 2px solid var(--c-border);
+  background: var(--c-white);
+}
+
+.qdot.gesteld {
+  border-color: var(--c-green);
+}
+.qdot.dun {
+  border-color: var(--c-orange);
+  background: linear-gradient(90deg, var(--c-orange) 50%, var(--c-white) 50%);
+}
+.qdot.beantwoord {
+  border-color: var(--c-green);
+  background: var(--c-green);
+}
+
+.qtext {
+  font: 500 15px/1.45 var(--font-head);
+}
+
+.qrow.beantwoord .qtext {
+  color: var(--c-muted);
+}
+
+.core {
+  margin-left: 8px;
+  color: var(--c-green);
+  font-weight: 600;
+}
+
+.answer {
+  background: var(--c-green-04);
+  border: 1px solid var(--c-green-border);
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.answer.dun {
+  background: var(--c-orange-08);
+  border-color: rgba(198, 122, 0, 0.3);
+}
+
+.insert {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  margin: 4px 0 8px 28px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  border: 1px dashed var(--c-border);
+  background: var(--c-white);
+  align-items: start;
+}
+
+.insert.vraag {
+  border-color: rgba(198, 122, 0, 0.45);
+}
+
+.insert.notitie {
+  border-color: rgba(36, 99, 184, 0.35);
+  background: rgba(36, 99, 184, 0.04);
+}
+
+.chip.blue {
+  background: rgba(36, 99, 184, 0.1);
+  color: var(--c-blue);
+}
+
+.fresh {
+  animation: pop 0.25s ease-out, glow 2.4s ease-out;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 0 3px rgba(0, 160, 77, 0.35);
+  }
+  to {
+    box-shadow: 0 0 0 0 rgba(0, 160, 77, 0);
+  }
+}

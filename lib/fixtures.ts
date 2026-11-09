@@ -7,7 +7,8 @@ import type { Company, Deal, LeadEngineRecord, Meeting, Segment } from "./store/
 // fixtures/local/ staat in .gitignore: daar mogen gegevens van echte bedrijven in, ze verlaten
 // deze machine niet via de repo.
 
-type ScriptedSet = { briefing?: unknown; updates?: unknown[]; debrief?: unknown };
+type ScriptEvents = { seq: number; asked?: unknown[]; answers?: unknown[]; inserted?: unknown[] };
+type ScriptedSet = { briefing?: unknown; updates?: unknown[]; debrief?: unknown; script_events?: ScriptEvents[] };
 type Enrichment = Omit<LeadEngineRecord, "company_id" | "updated_at">;
 
 export type Fixtures = {

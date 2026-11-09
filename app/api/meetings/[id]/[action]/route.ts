@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { briefing, debrief, liveUpdate } from "@/lib/agent/engine";
+import { mergeScript } from "@/lib/agent/schemas";
+import { SCRIPT } from "@/lib/agent/script";
 import { dossierText, loadDossier, minuteOf, needsEnrichment, transcriptText } from "@/lib/dossier";
 import { loadFixtures } from "@/lib/fixtures";
 import { finishEnrichmentIfDue, meetingState } from "@/lib/meeting-state";
@@ -60,7 +62,7 @@ export async function POST(req: Request, { params }: Ctx) {
       const previous = updates.at(-1)?.payload ?? null;
       const minute = minuteOf(seg);
       const started = Date.now();
-      const r = await liveUpdate(id, seg.seq, dossierText(dossier), previous, transcriptText(segments), minute);
+      const r = await liveUpdate(id, seg.seq, dossierText(dossier), previous, scriptStateText(updates.map((u) => u.payload)), transcriptText(segments), minute);
       if (!r.value) {
         // Geen antwoord van de agent: het fragment blijft wachten.
         notice = r.error;
@@ -109,6 +111,24 @@ export async function POST(req: Request, { params }: Ctx) {
   }
 
   return NextResponse.json({ notice: notice ?? null, state: await meetingState(id) });
+}
+
+// Wat al gesteld, beantwoord en ingevoegd is, zodat de agent enkel nieuwe dingen teruggeeft.
+function scriptStateText(payloads: Parameters<typeof mergeScript>[0]): string {
+  const { asked, answers, inserted } = mergeScript(payloads);
+  const lines: string[] = [];
+  for (const step of SCRIPT) {
+    for (const th of step.themes) {
+      const a = answers[th.id];
+      if (a) lines.push(`${th.id}: ${a.quality} – ${a.answer}`);
+      else if (asked.has(th.id)) lines.push(`${th.id}: gesteld, nog geen antwoord`);
+    }
+  }
+  for (const i of inserted) {
+    const a = answers[i.id];
+    lines.push(`${i.id} (${i.kind} in ${i.step}, na ${i.after ?? "einde"}): ${i.text}${a ? ` – antwoord: ${a.answer}` : ""}`);
+  }
+  return lines.length ? lines.join("\n") : "nog niets ingevuld";
 }
 
 async function startEnrichment(companyId: string) {
