@@ -18,7 +18,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <span>Projecten</span>
           <span>Offertes</span>
         </nav>
-        <div className="sidebar-foot">Demo van de Sales Co-pilot. Alle gegevens zijn fictief.</div>
+        <div className="sidebar-foot">Demo van de Sales Co-pilot. Draait lokaal; niets wordt naar Central of naar klanten gestuurd.</div>
       </aside>
       <main className="main">
         <div className="container">{children}</div>

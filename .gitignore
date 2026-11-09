@@ -5,5 +5,6 @@ next-env.d.ts
 .env
 .env.local
 data/store.json
+fixtures/local/
 supabase/.temp/
 .DS_Store

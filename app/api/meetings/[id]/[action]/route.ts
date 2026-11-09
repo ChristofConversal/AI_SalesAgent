@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import demo from "@/fixtures/demo.json";
 import { briefing, debrief, liveUpdate } from "@/lib/agent/engine";
 import { dossierText, loadDossier, minuteOf, needsEnrichment, transcriptText } from "@/lib/dossier";
+import { loadFixtures } from "@/lib/fixtures";
 import { finishEnrichmentIfDue, meetingState } from "@/lib/meeting-state";
 import { getStore } from "@/lib/store";
 import type { Segment } from "@/lib/store";
@@ -38,7 +38,8 @@ export async function POST(req: Request, { params }: Ctx) {
 
     case "briefing": {
       const le = await finishEnrichmentIfDue(dossier.leadEngine);
-      const r = await briefing(dossierText({ ...dossier, leadEngine: le }));
+      const r = await briefing(id, dossierText({ ...dossier, leadEngine: le }));
+      if (!r.value) return NextResponse.json({ error: r.error }, { status: 503 });
       const copilot = await store.getCopilot(id);
       await store.saveCopilot({ ...copilot, briefing: { ...r.value, source: r.source, created_at: new Date().toISOString() } });
       notice = r.error;
@@ -48,19 +49,24 @@ export async function POST(req: Request, { params }: Ctx) {
     // Volgend fragment van het (fictieve) gesprek binnenhalen en de agent laten reageren.
     // In Central gebeurt dit wanneer de recorder een nieuw segment wegschrijft.
     case "segment": {
-      if (id !== "m-lindeman") return NextResponse.json({ error: "Enkel de demo-meeting heeft een transcript" }, { status: 400 });
+      const script = loadFixtures().transcripts[id];
+      if (!script) return NextResponse.json({ error: "Deze meeting heeft geen testgesprek" }, { status: 400 });
       const done = await store.listSegments(id);
-      const script = demo.transcript as Omit<Segment, "meeting_id">[];
       const next = script[done.length];
       if (!next) break;
       const seg: Segment = { ...next, meeting_id: id } as Segment;
-      await store.addSegment(seg);
       const segments = [...done, seg];
       const updates = await store.listUpdates(id);
       const previous = updates.at(-1)?.payload ?? null;
       const minute = minuteOf(seg);
       const started = Date.now();
-      const r = await liveUpdate(seg.seq, dossierText(dossier), previous, transcriptText(segments), minute);
+      const r = await liveUpdate(id, seg.seq, dossierText(dossier), previous, transcriptText(segments), minute);
+      if (!r.value) {
+        // Geen antwoord van de agent: het fragment blijft wachten.
+        notice = r.error;
+        break;
+      }
+      await store.addSegment(seg);
       await store.addUpdate({
         meeting_id: id,
         seq: seg.seq,
@@ -77,7 +83,8 @@ export async function POST(req: Request, { params }: Ctx) {
     case "debrief": {
       const segments = await store.listSegments(id);
       if (segments.length === 0) return NextResponse.json({ error: "Nog geen transcript" }, { status: 400 });
-      const r = await debrief(dossierText(dossier), transcriptText(segments));
+      const r = await debrief(id, dossierText(dossier), transcriptText(segments));
+      if (!r.value) return NextResponse.json({ error: r.error }, { status: 503 });
       const copilot = await store.getCopilot(id);
       await store.saveCopilot({ ...copilot, debrief: { ...r.value, source: r.source, created_at: new Date().toISOString() } });
       notice = r.error;

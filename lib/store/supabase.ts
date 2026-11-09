@@ -1,5 +1,5 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import demo from "../../fixtures/demo.json";
+import { loadFixtures } from "../fixtures";
 import type { Company, CopilotRecord, Deal, Feedback, LeadEngineRecord, Meeting, Segment, Store, StoredUpdate } from "./types";
 
 // Supabase-opslag. Dezelfde tabellen als supabase/migrations/0001_init.sql.
@@ -81,12 +81,13 @@ export const supabaseStore: Store = {
     for (const table of ["meeting_segments", "copilot_updates", "copilot", "copilot_feedback"]) {
       await check(db().from(table).delete().eq("meeting_id", meetingId));
     }
-    const original = (demo.meetings as Meeting[]).find((m) => m.id === meetingId);
+    const f = loadFixtures();
+    const original = f.meetings.find((m) => m.id === meetingId);
     if (original) {
+      const current = await this.getMeeting(meetingId);
       await check(db().from("meetings").upsert(original));
-      if (original.company_id === null) {
-        await check(db().from("lead_engine").upsert(demo.lead_engine as LeadEngineRecord[]));
-      }
+      const start = f.lead_engine.find((r) => r.company_id === (original.company_id ?? current?.company_id));
+      if (start) await check(db().from("lead_engine").upsert(start));
     }
   },
 };

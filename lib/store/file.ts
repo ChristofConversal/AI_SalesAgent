@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import demo from "../../fixtures/demo.json";
+import { loadFixtures } from "../fixtures";
 import type {
   Company,
   CopilotRecord,
@@ -29,11 +29,12 @@ type Db = {
 const FILE = path.join(process.cwd(), "data", "store.json");
 
 export function seedDb(): Db {
+  const f = loadFixtures();
   return {
-    companies: demo.companies as Company[],
-    deals: demo.deals as Deal[],
-    meetings: demo.meetings as Meeting[],
-    lead_engine: demo.lead_engine as LeadEngineRecord[],
+    companies: f.companies,
+    deals: f.deals,
+    meetings: f.meetings,
+    lead_engine: f.lead_engine,
     segments: [],
     updates: [],
     copilot: [],
@@ -45,7 +46,26 @@ function load(): Db {
   if (!fs.existsSync(FILE)) {
     save(seedDb());
   }
-  return JSON.parse(fs.readFileSync(FILE, "utf8")) as Db;
+  const db = JSON.parse(fs.readFileSync(FILE, "utf8")) as Db;
+  // Nieuwe lokale dossiers (fixtures/local) verschijnen zonder de opslag te wissen.
+  const fresh = seedDb();
+  let added = false;
+  for (const key of ["companies", "deals", "meetings"] as const) {
+    for (const row of fresh[key]) {
+      if (!(db[key] as { id: string }[]).some((r) => r.id === row.id)) {
+        (db[key] as { id: string }[]).push(row);
+        added = true;
+      }
+    }
+  }
+  for (const rec of fresh.lead_engine) {
+    if (!db.lead_engine.some((r) => r.company_id === rec.company_id)) {
+      db.lead_engine.push(rec);
+      added = true;
+    }
+  }
+  if (added) save(db);
+  return db;
 }
 
 function save(db: Db) {
@@ -135,10 +155,10 @@ export const fileStore: Store = {
       const original = fresh.meetings.find((m) => m.id === meetingId);
       if (original) {
         db.meetings = db.meetings.map((m) => (m.id === meetingId ? original : m));
-        if (original.company_id === null) {
-          // De koppeling ongedaan maken zet ook de Lead Engine terug naar de start van de demo.
-          db.lead_engine = fresh.lead_engine;
-        }
+        const companyId = original.company_id ?? fresh.companies.find((c) => db.meetings.find((m) => m.id === meetingId)?.company_id === c.id)?.id;
+        const start = fresh.lead_engine.find((r) => r.company_id === companyId);
+        // De Lead Engine van dit bedrijf gaat terug naar de start van de demo.
+        if (start) db.lead_engine = [...db.lead_engine.filter((r) => r.company_id !== start.company_id), start];
       }
     });
   },

@@ -7,6 +7,8 @@ export type Company = {
   city: string | null;
   domain: string | null;
   sector: string | null;
+  // Historiek uit Central (projecten, offertes), als korte zinnen.
+  notes?: string[];
 };
 
 export type Deal = {

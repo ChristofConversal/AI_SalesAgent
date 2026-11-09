@@ -21,7 +21,7 @@ export async function loadDossier(meetingId: string): Promise<Dossier | null> {
 // Bekend is niet hetzelfde als verrijkt (les uit de test met een echt dossier).
 export function needsEnrichment(rec: LeadEngineRecord | null): boolean {
   if (!rec) return true;
-  if (rec.status === "enriching") return false;
+  if (rec.status === "enriching" || rec.status === "enriched") return false;
   return rec.fte === null || rec.revenue_eur === null || rec.web === null || (rec.icp_confidence ?? 0) < 0.5;
 }
 
@@ -49,6 +49,8 @@ export function dossierText(d: Dossier): string {
   } else {
     lines.push("Bedrijf: meeting nog niet gekoppeld.");
   }
+  for (const note of d.company?.notes ?? []) lines.push(`Historiek (Central): ${note}`);
+  if (d.company && d.deals.length === 0) lines.push("Deals (Central): geen open of eerdere deals.");
   for (const deal of d.deals) lines.push(`Deal (Central): ${deal.title}, fase ${deal.stage}, bedrag ${deal.amount ?? "onbekend"}`);
   const le = d.leadEngine;
   if (le) {

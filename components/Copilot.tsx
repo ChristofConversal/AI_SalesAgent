@@ -57,7 +57,7 @@ export default function Copilot({ state, setState }: Props) {
     try {
       const r = await act(id, action, body);
       setState(r.state);
-      if (r.notice) setNotice(`Claude gaf een fout; de demo toont het script. (${r.notice})`);
+      if (r.notice) setNotice(r.notice);
       return r.state;
     } catch (e) {
       setNotice(e instanceof Error ? e.message : String(e));
@@ -75,8 +75,10 @@ export default function Copilot({ state, setState }: Props) {
     (async () => {
       let s: MeetingState | null = state;
       while (!cancelled && playingRef.current && s && s.segments.length < s.totalSegments) {
+        const before: number = s.segments.length;
         s = await run("segment");
-        if (!s || s.segments.length >= s.totalSegments) break;
+        // Stop als het fragment niet verwerkt werd (geen antwoord van de agent).
+        if (!s || s.segments.length === before || s.segments.length >= s.totalSegments) break;
         await new Promise((r) => setTimeout(r, pace * 1000));
       }
       if (!cancelled) setPlaying(false);
@@ -201,15 +203,20 @@ function LinkAndEnrich({ state, busy, run }: { state: MeetingState; busy: string
     );
   }
   if (le?.status === "enriched") {
+    // Enkel tonen wat de verrijking effectief opleverde.
+    const facts = [
+      le.fte !== null && `${le.fte} VTE`,
+      le.revenue_eur !== null && `omzet €${(le.revenue_eur / 1e6).toFixed(1)} mln`,
+      le.icp_score !== null && `ICP ${le.icp_score}`,
+      le.leadinfo && `Leadinfo: ${le.leadinfo.pages.length} pagina's bezocht`,
+      le.web && `website: ${le.web.cms}`,
+    ].filter(Boolean) as string[];
+    const missing = le.revenue_eur === null || le.web === null;
     return (
       <div className="card accent small row">
         <strong>Dossier verrijkt.</strong>
-        <span>{le.fte} VTE</span>·<span>omzet €{((le.revenue_eur ?? 0) / 1e6).toFixed(1)} mln</span>·<span>ICP {le.icp_score}</span>
-        {le.leadinfo && (
-          <>
-            ·<span>Leadinfo: {le.leadinfo.pages.length} pagina's bezocht</span>
-          </>
-        )}
+        <span>{facts.join(" · ") || "Geen extra gegevens gevonden."}</span>
+        {missing && <span className="muted">Geen NBB-cijfers of websitescan beschikbaar.</span>}
       </div>
     );
   }
