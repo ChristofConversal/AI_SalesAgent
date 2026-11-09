@@ -58,12 +58,22 @@ export type Segment = {
   utterances: { channel: "mic" | "system"; speaker: string; text: string }[];
 };
 
-export type StoredUpdate = { meeting_id: string; seq: number; t: number; payload: LiveUpdate; source: "claude" | "scripted"; latency_ms: number; created_at: string };
+export type StoredUpdate = {
+  meeting_id: string;
+  seq: number;
+  t: number;
+  payload: LiveUpdate;
+  source: "claude" | "scripted";
+  // Welke agent de update maakte: "scripted" of een Claude-model-id.
+  model?: string;
+  latency_ms: number;
+  created_at: string;
+};
 
 export type CopilotRecord = {
   meeting_id: string;
-  briefing: (Briefing & { source: "claude" | "scripted"; created_at: string }) | null;
-  debrief: (Debrief & { source: "claude" | "scripted"; created_at: string }) | null;
+  briefing: (Briefing & { source: "claude" | "scripted"; model?: string; created_at: string }) | null;
+  debrief: (Debrief & { source: "claude" | "scripted"; model?: string; created_at: string }) | null;
 };
 
 export type Feedback = { meeting_id: string; suggestion_id: string; action: "gesteld" | "niet_relevant"; created_at: string };

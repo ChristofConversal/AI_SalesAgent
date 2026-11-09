@@ -1,4 +1,4 @@
-import { agentMode } from "./agent/engine";
+import { agentMode, defaultAgent, hasApiKey } from "./agent/engine";
 import { loadDossier, needsEnrichment, suggestLink, talkRatio } from "./dossier";
 import { getStore } from "./store";
 import { loadFixtures } from "./fixtures";
@@ -38,6 +38,8 @@ export async function meetingState(id: string) {
     feedback: await store.listFeedback(id),
     talk: talkRatio(segments),
     mode: agentMode(),
+    defaultAgent: defaultAgent(),
+    hasApiKey: hasApiKey(),
     storeKind: store.kind,
   };
 }

@@ -8,3 +8,4 @@ data/store.json
 fixtures/local/
 supabase/.temp/
 .DS_Store
+docs/

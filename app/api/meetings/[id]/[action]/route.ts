@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { briefing, debrief, liveUpdate } from "@/lib/agent/engine";
+import { isAgentId } from "@/lib/agent/models";
 import { mergeScript } from "@/lib/agent/schemas";
 import { SCRIPT } from "@/lib/agent/script";
 import { dossierText, loadDossier, minuteOf, needsEnrichment, transcriptText } from "@/lib/dossier";
@@ -20,6 +21,8 @@ export async function POST(req: Request, { params }: Ctx) {
   if (!dossier) return NextResponse.json({ error: "Meeting niet gevonden" }, { status: 404 });
   const body = (await req.json().catch(() => ({}))) as Record<string, string | null>;
   let notice: string | undefined;
+  // De agent uit de keuzelijst in de tab; zonder keuze de standaard uit de omgeving.
+  const agent = isAgentId(body.agent) ? body.agent : undefined;
 
   switch (action) {
     // Koppelvoorstel bevestigen: meeting hangt daarna aan bedrijf en deal.
@@ -40,10 +43,10 @@ export async function POST(req: Request, { params }: Ctx) {
 
     case "briefing": {
       const le = await finishEnrichmentIfDue(dossier.leadEngine);
-      const r = await briefing(id, dossierText({ ...dossier, leadEngine: le }));
+      const r = await briefing(agent, id, dossierText({ ...dossier, leadEngine: le }));
       if (!r.value) return NextResponse.json({ error: r.error }, { status: 503 });
       const copilot = await store.getCopilot(id);
-      await store.saveCopilot({ ...copilot, briefing: { ...r.value, source: r.source, created_at: new Date().toISOString() } });
+      await store.saveCopilot({ ...copilot, briefing: { ...r.value, source: r.source, model: r.model, created_at: new Date().toISOString() } });
       notice = r.error;
       break;
     }
@@ -62,7 +65,7 @@ export async function POST(req: Request, { params }: Ctx) {
       const previous = updates.at(-1)?.payload ?? null;
       const minute = minuteOf(seg);
       const started = Date.now();
-      const r = await liveUpdate(id, seg.seq, dossierText(dossier), previous, scriptStateText(updates.map((u) => u.payload)), transcriptText(segments), minute);
+      const r = await liveUpdate(agent, id, seg.seq, dossierText(dossier), previous, scriptStateText(updates.map((u) => u.payload)), transcriptText(segments), minute);
       if (!r.value) {
         // Geen antwoord van de agent: het fragment blijft wachten.
         notice = r.error;
@@ -75,6 +78,7 @@ export async function POST(req: Request, { params }: Ctx) {
         t: minute,
         payload: { ...r.value, t: minute },
         source: r.source,
+        model: r.model,
         latency_ms: Date.now() - started,
         created_at: new Date().toISOString(),
       });
@@ -85,10 +89,10 @@ export async function POST(req: Request, { params }: Ctx) {
     case "debrief": {
       const segments = await store.listSegments(id);
       if (segments.length === 0) return NextResponse.json({ error: "Nog geen transcript" }, { status: 400 });
-      const r = await debrief(id, dossierText(dossier), transcriptText(segments));
+      const r = await debrief(agent, id, dossierText(dossier), transcriptText(segments));
       if (!r.value) return NextResponse.json({ error: r.error }, { status: 503 });
       const copilot = await store.getCopilot(id);
-      await store.saveCopilot({ ...copilot, debrief: { ...r.value, source: r.source, created_at: new Date().toISOString() } });
+      await store.saveCopilot({ ...copilot, debrief: { ...r.value, source: r.source, model: r.model, created_at: new Date().toISOString() } });
       notice = r.error;
       break;
     }

@@ -9,6 +9,7 @@ import {
   type Debrief,
   type LiveUpdate,
 } from "@/lib/agent/schemas";
+import { AGENTS, agentLabel, isAgentId, type AgentId } from "@/lib/agent/models";
 import { act, fetchState, fmt, type MeetingState } from "./api";
 import ScriptPanel from "./ScriptPanel";
 
@@ -38,6 +39,20 @@ export default function Copilot({ state, setState }: Props) {
   const [playing, setPlaying] = useState(false);
   const [pace, setPace] = useState(4);
   const playingRef = useRef(false);
+  // Keuze in de keuzelijst "Agent"; onthouden in deze browser.
+  const [agent, setAgent] = useState<AgentId>(state.defaultAgent);
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("copilot.agent");
+      if (isAgentId(saved)) setAgent(saved);
+    } catch {}
+  }, []);
+  function chooseAgent(a: AgentId) {
+    setAgent(a);
+    try {
+      localStorage.setItem("copilot.agent", a);
+    } catch {}
+  }
 
   const enriching = state.leadEngine?.status === "enriching";
   const linked = Boolean(state.company);
@@ -54,7 +69,7 @@ export default function Copilot({ state, setState }: Props) {
     setBusy(action);
     setNotice(null);
     try {
-      const r = await act(id, action, body);
+      const r = await act(id, action, { agent, ...body });
       setState(r.state);
       if (r.notice) setNotice(r.notice);
       return r.state;
@@ -105,9 +120,16 @@ export default function Copilot({ state, setState }: Props) {
           ))}
         </div>
         <div className="row small">
-          <span className="chip outline" title="Zet ANTHROPIC_API_KEY om Claude te gebruiken">
-            Agent: {state.mode === "claude" ? "Claude" : "script (zonder API)"}
-          </span>
+          <label className="agent-pick" title={AGENTS.find((a) => a.id === agent)?.hint}>
+            <span className="label">Agent</span>
+            <select value={agent} onChange={(e) => chooseAgent(e.target.value as AgentId)} disabled={playing}>
+              {AGENTS.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.label}
+                </option>
+              ))}
+            </select>
+          </label>
           <span className="chip outline">Opslag: {state.storeKind === "supabase" ? "Supabase" : "lokaal bestand"}</span>
           <button className="btn ghost small" onClick={reset} disabled={busy !== null}>
             Demo opnieuw
@@ -115,6 +137,11 @@ export default function Copilot({ state, setState }: Props) {
         </div>
       </div>
 
+      {agent !== "scripted" && !state.hasApiKey && (
+        <div className="notice">
+          {agentLabel(agent)} gekozen, maar er staat geen ANTHROPIC_API_KEY in .env.local. De agent valt terug op het script.
+        </div>
+      )}
       {notice && <div className="notice">{notice}</div>}
 
       <LinkAndEnrich state={state} busy={busy} run={run} />
@@ -248,7 +275,7 @@ function BriefingView({ state, busy, run, onStart }: { state: MeetingState; busy
       </div>
     );
   }
-  return <BriefingCard b={b} source={b.source} onStart={onStart} />;
+  return <BriefingCard b={b} source={agentLabel(b.model ?? b.source)} onStart={onStart} />;
 }
 
 function BriefingCard({ b, source, onStart }: { b: Briefing; source: string; onStart: () => void }) {
@@ -286,7 +313,7 @@ function BriefingCard({ b, source, onStart }: { b: Briefing; source: string; onS
               →
             </button>
           </div>
-          <span className="small muted">Gemaakt door: {source === "claude" ? "Claude" : "script"}</span>
+          <span className="small muted">Gemaakt door: {source}</span>
         </div>
       </div>
       <div className="stack">
@@ -389,7 +416,7 @@ function LiveView(p: {
         </div>
         <span className="small muted">
           Fragment {state.segments.length} van {state.totalSegments}
-          {last ? ` · minuut ${t} · ${last.source === "claude" ? `Claude, ${(last.latency_ms / 1000).toFixed(1)} s` : "script"}` : ""}
+          {last ? ` · minuut ${t} · ${agentLabel(last.model ?? last.source)}${last.source === "claude" ? `, ${(last.latency_ms / 1000).toFixed(1)} s` : ""}` : ""}
         </span>
       </div>
 
@@ -549,7 +576,7 @@ function DebriefView({ state, busy, run }: { state: MeetingState; busy: string |
       </div>
     );
   }
-  return <DebriefCard d={d} source={d.source} />;
+  return <DebriefCard d={d} source={agentLabel(d.model ?? d.source)} />;
 }
 
 function DebriefCard({ d, source }: { d: Debrief; source: string }) {
@@ -620,7 +647,7 @@ function DebriefCard({ d, source }: { d: Debrief; source: string }) {
             ))}
           </div>
           <List title="Coaching (enkel voor de admin)" items={d.coaching} />
-          <span className="small muted">Gemaakt door: {source === "claude" ? "Claude" : "script"}</span>
+          <span className="small muted">Gemaakt door: {source}</span>
         </div>
       </div>
     </div>

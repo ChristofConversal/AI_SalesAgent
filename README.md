@@ -24,7 +24,7 @@ npm run dev
 
 Open http://localhost:3000. Zonder verdere instellingen draait alles lokaal:
 
-- **Agent:** zonder `ANTHROPIC_API_KEY` speelt de agent vooraf geschreven antwoorden af (`fixtures/demo.json`). Met een sleutel draait hij op Claude (`claude-opus-5-5`; live op effort `low`, briefing `medium`, debrief `high`). Faalt een Claude-aanroep, dan toont de tab de fout en loopt de demo verder op het script.
+- **Agent:** kies in de tab bij **Agent** tussen Script (zonder API), Claude Haiku 5.5, Claude Sonnet 5.5 en Claude Opus 5.5. De keuze geldt voor briefing, live en debrief, wordt in de browser onthouden, en bij elke update staat welk model ze maakte. Script speelt vooraf geschreven antwoorden af (`fixtures/demo.json`) en kost niets. Claude vraagt een `ANTHROPIC_API_KEY` in `.env.local` (betalend per gebruik; live op effort `low`, briefing `medium`, debrief `high`). Zonder sleutel of bij een fout toont de tab waarom en loopt de demo verder op het script. De standaardkeuze komt uit `COPILOT_MODE` en `COPILOT_MODEL`.
 - **Opslag:** zonder Supabase-instellingen gaat alles naar `data/store.json`. Wissen: `npm run reset` of de knop **Demo opnieuw**.
 
 ## Met Supabase (Docker)
